@@ -31,7 +31,6 @@ services:
       - mysql
     volumes:
       - ${OJS_PUBLIC_DIR}:/var/www/html/public
-      - ${OJS_CONFIG_FILE}:/var/www/html/config.inc.php
       - ${OJS_FILES_DIR}:/var/www/html/files
 
   
