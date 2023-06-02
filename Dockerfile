@@ -24,7 +24,7 @@ RUN docker-php-ext-configure gd --with-jpeg && \
 RUN wget -qO- https://pkp.sfu.ca/ojs/download/ojs-3.3.0-14.tar.gz | tar xvz -C /var/www/html --strip-components=1 && \
     chown -R www-data:www-data /var/www/html
 
-RUN chown -R www-data:www-data /var/www/files 
+RUN mkdir -p /var/www/files && chown -R www-data:www-data /var/www/files 
 
 
 # Habilitar mod_rewrite y ajustar configuración del servidor Apache

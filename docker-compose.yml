@@ -33,7 +33,6 @@ services:
       - ${OJS_PUBLIC_DIR}:/var/www/html/public
       - ${OJS_FILES_DIR}:/var/www/files
 
-  
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
