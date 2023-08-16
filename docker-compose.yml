@@ -23,7 +23,7 @@ services:
     ports: 
       - ${PHPMYADMIN_PUBLIC_PORT}:80
   ojs:
-    container_name: ${PROJECT_NAME}_ojs
+    container_name: ${PROJECT_NAME}_web
     build: .
     ports:
       - ${OJS_PUBLIC_PORT}:80
