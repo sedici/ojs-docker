@@ -1,0 +1,87 @@
+# OJS-DOCKER  
+
+
+
+Configuración inicial global:
+
+El directorio private_ojs debe contener todos los archivos privados de OJS.
+Además, el archivo .env debe contener las variables de entorno con las que se realizará la migración:
+
+Nombre del proyecto, utilizado para crear containers docker:
+PROJECT_NAME=ojs
+
+Nombre de la base de datos, contraseña del usuario root, usuario y contraseña, necesarios para generar la base de datos:
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE_NAME=ojs
+MYSQL_DATABASE_USER=ojs
+MYSQL_DATABASE_PASSWORD=ojspassword
+
+
+recomendacion de .env:
+
+PROJECT_NAME=ojs
+OJS_VERSION=3.3.0-14
+
+#DATABASE
+MYSQL_ROOT_PASSWORD=root
+MYSQL_DATABASE_NAME=ojs
+MYSQL_DATABASE_USER=ojs
+MYSQL_DATABASE_PASSWORD=ojspassword
+
+#PORT
+PHPMYADMIN_PUBLIC_PORT=8080
+OJS_PUBLIC_PORT=80
+
+#DIR
+DATA_DIR=./data
+OJS_PUBLIC_DIR=${DATA_DIR}/ojs
+OJS_FILES_DIR=${DATA_DIR}/files
+
+
+
+Como iniciar el contendos:
+
+- Antes de iniciar el contenedor en el diretorio public_ojs debe descomprimir una copia de OJS
+
+- Asegurarse que el stack definido en Dockerfile cumple con los requerimientos para ejecutar las version de OJS. En particular, debe observarse que la versión de PHP sea adecuada en la línea :
+    "# Imagen base con Apache y PHP 7.4
+    FROM php:7.4-apache"
+
+- Asignar permisos de lectura y escritura sobre el directorio de cache y public de OJS:
+chmod a+rw data/public_ojs/cache -R
+chmod a+rw data/public_ojs/public -R
+
+- Editar el archivo config.inc.php y colocar allí la configuración necesaria que OJS versión Y se ejecute desde el container docker:
+
+
+Configuracion recomendada:
+
+;;;;;;;;;;;;;;;;;;;;
+; General Settings ;
+;;;;;;;;;;;;;;;;;;;;
+
+[general]
+
+installed = Off
+base_url = "http://localhost"
+
+;;;;;;;;;;;;;;;;;;;;;
+; Database Settings ;
+;;;;;;;;;;;;;;;;;;;;;
+
+[database]
+driver = mysqli
+host = mysql
+username = ojs
+password = ojspassword
+name = ojs
+
+;;;;;;;;;;;;;;;;;
+; File Settings ;
+;;;;;;;;;;;;;;;;;
+
+[files]
+files_dir = /var/www/files
+public_files_dir = public
+
+
