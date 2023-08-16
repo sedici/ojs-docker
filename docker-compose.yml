@@ -30,9 +30,9 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ${OJS_PUBLIC_DIR}:/var/www/html/public
+      - ${OJS_PUBLIC_DIR}:/var/www/html
       - ${OJS_FILES_DIR}:/var/www/files
-
+      
     environment:
       DB_HOST: mysql
       DB_PORT: 3306
