@@ -22,20 +22,19 @@ services:
       PMA_HOST: mysql
     ports: 
       - ${PHPMYADMIN_PUBLIC_PORT}:80
-  ojs:
+  web:
+    image: webdevops/php-apache-dev:8.0
     container_name: ${PROJECT_NAME}_web
-    build: .
     ports:
       - ${OJS_PUBLIC_PORT}:80
     depends_on:
       - mysql
     volumes:
-      - ${OJS_PUBLIC_DIR}:/var/www/html
-      - ${OJS_FILES_DIR}:/var/www/files
-      
+      - ${OJS_PUBLIC_DIR}:/app
+      - ${OJS_FILES_DIR}:/var/ojs-data/
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_USERNAME: ${MYSQL_DATABASE_USER}
-      DB_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
-      DB_NAME: ${MYSQL_DATABASE_NAME}
+      PHP_MEMORY_LIMIT: 512M
+      PHP_DISPLAY_ERRORS: 1
+      POSTFIX_MYNETWORKS: host
+    links:
+      - mysql

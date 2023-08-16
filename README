@@ -1,6 +1,6 @@
 # OJS-DOCKER  
 
-Soporta hasta las version 3.3.0-15
+Uso local, soporta hasta las version 3.4
 
 ## Configuración inicial global:
 
@@ -50,10 +50,9 @@ OJS_FILES_DIR=${DATA_DIR}/files
     FROM php:7.4-apache"
 ```
 - Asignar permisos de lectura y escritura sobre el directorio de cache y public de OJS:
-`chmod a+rw data/public_ojs/cache -R`
-`chmod a+rw data/public_ojs/public -R`
+`chmod a+rw data/public_ojs/cache -R && c0hmod a+rw data/public_ojs/public -R`
 
-- Editar el archivo config.inc.php y colocar allí la configuración necesaria que OJS versión Y se ejecute desde el container docker:
+- Editar el archivo public_ojs/config.inc.php y colocar allí la configuración necesaria que OJS versión Y se ejecute desde el container docker:
 
 
 ### Configuracion recomendada:
@@ -83,7 +82,7 @@ name = ojs
 ;;;;;;;;;;;;;;;;;
 
 [files]
-files_dir = /var/www/files
+files_dir = /var/ojs-data/
 public_files_dir = public
 ```
 
