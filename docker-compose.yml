@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_DATABASE_PASSWORD}
       MYSQL_USER: ${MYSQL_DATABASE_USER}
     volumes:
-      - ${DATA_DIR}/mysql:/var/lib/mysql
+      - ${MYSQL_DIR}:/var/lib/mysql
       - ./init-db:/docker-entrypoint-initdb.d
   phpmyadmin:
     depends_on:
