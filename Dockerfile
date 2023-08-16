@@ -19,10 +19,8 @@ RUN apt-get update && \
 RUN docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install gd mysqli pdo pdo_mysql zip intl xmlrpc opcache gettext
 
-# Descargar e instalar OJS
-RUN wget -qO- https://pkp.sfu.ca/ojs/download/ojs-3.3.0-14.tar.gz | tar xvz -C /var/www/html --strip-components=1 && \
-    chown -R www-data:www-data /var/www/html
-
+# Crear directorios 
+RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html 
 RUN mkdir -p /var/www/files && chown -R www-data:www-data /var/www/files 
 
 # Habilitar mod_rewrite y ajustar configuración del servidor Apache
