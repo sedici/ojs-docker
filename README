@@ -40,7 +40,7 @@ OJS_FILES_DIR=${DATA_DIR}/files
 ```
 
 
-## Como iniciar el contendos:
+## Como iniciar el contenedor:
 
 - Antes de iniciar el contenedor en el diretorio public_ojs debe descomprimir una copia de OJST [Download and Install OJS](https://pkp.sfu.ca/software/ojs/download/).
 
@@ -56,6 +56,7 @@ OJS_FILES_DIR=${DATA_DIR}/files
 
 
 ### Configuracion recomendada:
+
 ```
 ;;;;;;;;;;;;;;;;;;;;
 ; General Settings ;
