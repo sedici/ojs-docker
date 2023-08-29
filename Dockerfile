@@ -2,8 +2,8 @@
 FROM php:7.4-apache
 
 # Actualizar paquetes y descargar dependencias necesarias
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update 
+RUN apt-get install -y \
         libpng-dev \
         libjpeg-dev \
         libpq-dev \
