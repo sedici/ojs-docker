@@ -23,7 +23,7 @@ services:
     ports: 
       - ${PHPMYADMIN_PUBLIC_PORT}:80
   web:
-    image: webdevops/php-apache-dev:8.0
+    build: .
     container_name: ${PROJECT_NAME}_web
     ports:
       - ${OJS_PUBLIC_PORT}:80
