@@ -1,0 +1,55 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: ${PROJECT_NAME}_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ${DATA_DIR}/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  ojs:
+    image: ${OJS_IMAGE}:${OJS_VERSION}
+    build:
+      context: .
+      args:
+        OJS_VERSION: ${OJS_VERSION}
+    container_name: ${PROJECT_NAME}_web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - ${OJS_BIND_ADDRESS}:${OJS_PUBLIC_PORT}:80
+    environment:
+      OJS_BASE_URL: ${OJS_BASE_URL}
+      OJS_BEHIND_PROXY: ${OJS_BEHIND_PROXY}
+      OJS_DB_HOST: db
+      OJS_DB_USER: ${MYSQL_USER}
+      OJS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      OJS_DB_NAME: ${MYSQL_DATABASE}
+    volumes:
+      - ${DATA_DIR}/config:/var/www/config
+      - ${DATA_DIR}/files:/var/www/files
+      - ${DATA_DIR}/public:/var/www/html/public
+
+  # Solo se levanta con: docker compose --profile tools up -d
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: ${PROJECT_NAME}_phpmyadmin
+    profiles: ["tools"]
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+    ports:
+      - 127.0.0.1:${PHPMYADMIN_PUBLIC_PORT}:80

@@ -1,0 +1,4 @@
+.env
+data/
+plugins-src/
+*.tar.gz

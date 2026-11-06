@@ -1,0 +1,4 @@
+*
+!docker/
+!plugins-src/
+!ojs-*.tar.gz

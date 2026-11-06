@@ -1,0 +1,6 @@
+# categoria/carpeta-en-OJS  repo-de-GitHub  commit (rama migrate de cada repo)
+generic/docxConverter sedici/docxConverter f17ac7f6b39b88191b3c4ec908fe72217dff5563
+generic/texture sedici/texture 6fdfe36e13fc0f81b49e93844763686213584558
+generic/XMLMetadataBuilder sedici/XMLMetadataBuilder 84ed830de13bb11b6243c6dcce9744f87541df99
+generic/jatsParser sedici/JATSParserPlugin 187ee182c58085d627e82e895d8e18ebed4a3465
+importexport/scieloAdapter sedici/SciELO-JATS-Converter d1ffbebed220fe9969e2088669b1a52519b6f432
